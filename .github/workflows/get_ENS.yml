@@ -31,7 +31,7 @@ jobs:
           export_default_credentials: true
       - name: Get ENS
         run: |
-          python ./get_ENS/get_ENS.py
+          python ./get_ENS.py
       - name: upload ens.zip
         uses: actions/upload-artifact@main
         with:
