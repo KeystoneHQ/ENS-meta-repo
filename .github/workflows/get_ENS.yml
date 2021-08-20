@@ -1,0 +1,63 @@
+
+name: Get ENS
+
+on: 
+  push:
+    branches:
+      - master
+
+  schedule:
+    - cron:  '30 9 * * 1'
+
+jobs:
+  get_ens_to_sqlite:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@main
+      - name: Set up Python 3.7
+        uses: actions/setup-python@main
+        with:
+          python-version: '3.7'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install --upgrade pytz
+          pip install --upgrade google-cloud-bigquery
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          service_account_key: ${{ secrets.GETENSKEY }}
+          export_default_credentials: true
+      - name: Get ENS
+        run: |
+          python ./get_ENS/get_ENS.py
+      - name: upload ens.zip
+        uses: actions/upload-artifact@main
+        with:
+          name: ENS
+          path: outputs/
+      - name: zip ENS file
+        run: |
+          cd outputs
+          zip -r ENS.zip ENS
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ENS_Release
+          release_name: ENS Release
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: ./outputs/ENS.zip
+          asset_name: ENS.zip
+          asset_content_type: application/zip
