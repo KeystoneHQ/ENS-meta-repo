@@ -47,6 +47,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          allowUpdates: true
           tag_name: ENS_Release_Test
           release_name: ENS Release_Test
           draft: false
