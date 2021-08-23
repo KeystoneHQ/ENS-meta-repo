@@ -2,12 +2,8 @@
 name: Get ENS
 
 on: 
-  push:
-    branches:
-      - master
-
   schedule:
-    - cron:  '30 9 * * 1'
+    - cron:  '0 3 * * 1'
 
 jobs:
   get_ens_to_sqlite:
