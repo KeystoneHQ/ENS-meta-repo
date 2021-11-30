@@ -1,7 +1,12 @@
 
 name: Get ENS
 
+
+
 on: 
+  push:
+    branches:
+      - main
   schedule:
     - cron:  '0 3 * * 1'
 
