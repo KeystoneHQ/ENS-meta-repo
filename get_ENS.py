@@ -43,7 +43,8 @@ def get_ENS_to_sqlite(DB):
     ENS_list = query_ENS()
     for ENS in ENS_list:
         sql_insert_info = "insert into ENS (addr,name) values (?,?)"
-        cursor.execute(sql_insert_info, (to_checksum_address(ENS.addr), ENS.name))
+        cursor.execute(sql_insert_info, (ENS.addr , ENS.name))
+#         cursor.execute(sql_insert_info, (to_checksum_address(ENS.addr), ENS.name))
         print("{ENS} is done......".format(ENS=ENS.name))
 
     cursor.close()
