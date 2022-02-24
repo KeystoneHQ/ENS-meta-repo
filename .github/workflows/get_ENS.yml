@@ -43,6 +43,8 @@ jobs:
       - name: Get current time
         uses: josStorer/get-current-time@v2
         id: current-time
+        with:
+          format: YYYY-MM-DD
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -51,7 +53,7 @@ jobs:
         with:
           allowUpdates: true
           tag_name: "v1.0"
-          release_name: ens-release-${{ steps.current-time.outputs.day }}
+          release_name: ens-release-${{ steps.current-time.outputs.formattedTime }}
           draft: false
           prerelease: false
       - name: Upload Release Asset
