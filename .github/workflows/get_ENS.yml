@@ -47,12 +47,11 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          TIME: ${{ steps.current-time.outputs.time }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           allowUpdates: true
-          tag_name: ens-release-${{TIME}}
-          release_name: ens-release-${{TIME}}
+          tag_name: ens-release-${{ steps.current-time.outputs.time }}
+          release_name: ens-release-${{ steps.current-time.outputs.time }}
           draft: false
           prerelease: false
       - name: Upload Release Asset
