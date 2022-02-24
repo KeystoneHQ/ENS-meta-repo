@@ -41,7 +41,7 @@ jobs:
           cd outputs
           zip -r ENS.zip ENS
       - name: Get current time
-        uses: gerred/actions/current-time@master
+        uses: josStorer/get-current-time@v2
         id: current-time
       - name: Create Release
         id: create_release
@@ -51,7 +51,7 @@ jobs:
         with:
           allowUpdates: true
           tag_name: ${{ github.ref }}
-          release_name: ens-release-${{ steps.current-time.outputs.time }}
+          release_name: ens-release-${{ steps.current-time.outputs.day }}
           draft: false
           prerelease: false
       - name: Upload Release Asset
