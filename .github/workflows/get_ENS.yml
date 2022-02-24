@@ -50,6 +50,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           allowUpdates: true
+          tag_name: ${{ github.ref }}
           release_name: ens-release-${{ steps.current-time.outputs.day }}
           draft: false
           prerelease: false
