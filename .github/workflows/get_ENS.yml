@@ -24,7 +24,7 @@ jobs:
           pip install --upgrade google-cloud-bigquery
           pip install ethereum-utils==0.5.0
       - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@master
+        uses: google-github-actions/setup-gcloud@main
         with:
           service_account_key: ${{ secrets.GETENSKEY }}
           export_default_credentials: true
