@@ -51,12 +51,11 @@ jobs:
           format: YYYY-MM-DD
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: marvinpinto/action-automatic-releases@latest
         with:
-          allowUpdates: true
-          release_name: ens-release-${{ steps.current-time.outputs.formattedTime }}
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          title: ens-release-${{ steps.current-time.outputs.formattedTime }}
           draft: false
           prerelease: false
       - name: Upload Release Asset
